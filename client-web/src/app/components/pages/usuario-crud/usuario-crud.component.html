@@ -1,0 +1,185 @@
+<nz-card [nzTitle]="cardTitle">
+  <!-- Card Title -->
+  <ng-template #cardTitle>
+    <div class="card-title flex-row nowrap">
+      <span>Gestor de Usuarios</span>
+
+      <div class="actions flex-row nowrap">
+        <button nz-button nz-tooltip
+        [nzTooltipTitle]="'Crear'"
+        type="button"
+        class="btn-primary"
+        (click)="this.createUser()">
+          <i class="fas fa-plus"></i>
+        </button>
+
+        <button nz-button nz-tooltip
+        [nzTooltipTitle]="'En espera de confirmación'"
+        type="button"
+        class="btn-secondary"
+        (click)="this.viewQueue()">
+          <i class="fas fa-user-clock"></i>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- Card Body -->
+  <app-search-table
+  [input]="this.users"
+  (output)="this.filterUsers($event)"
+  [keys]="[ 'user', 'mail', 'nombres',
+  'apellidoP', 'apellidoM', 'usuarioTipo.nombre',
+  'usuarioTipo.descripc' ]">
+  </app-search-table>
+
+  <nz-table #tblUsers [nzData]="this.usersFilter" nzTableLayout="fixed">
+    <thead>
+      <tr>
+        <th>Mail</th>
+        <th>Nick</th>
+        <th>RUT</th>
+        <th>Nombres</th>
+        <th>Apellido P</th>
+        <th>Apellido M</th>
+        <th>Tipo Usuario</th>
+        <th class="actions">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of tblUsers.data">
+        <td *ngIf="!this.isEditing(user)" nz-tooltip
+        [nzTooltipTitle]="user.mail">
+          <span>{{ user.mail }}</span>
+        </td>
+        <td *ngIf="this.isEditing(user)">
+          <input type="text" nz-input
+          [(ngModel)]="this.userEdit.mail"
+          [placeholder]="'Ingrese E-Mail...'"
+          (input)="this.inputEmail($event.currentTarget)"
+          (blur)="this.blurTrim($event)" />
+        </td>
+
+        <td *ngIf="!this.isEditing(user)" nz-tooltip
+        [nzTooltipTitle]="user.user">
+          <span>{{ user.user }}</span>
+        </td>
+        <td *ngIf="this.isEditing(user)">
+          <input type="text" nz-input
+          [(ngModel)]="this.userEdit.user"
+          [placeholder]="'Ingrese Nickname...'"
+          (input)="this.inputNick($event.currentTarget)"
+          (blur)="this.blurTrim($event)" />
+        </td>
+
+        <td *ngIf="!this.isEditing(user)" nz-tooltip
+        [nzTooltipTitle]="user.rut">
+          <span>{{ user.rut }}</span>
+        </td>
+        <td *ngIf="this.isEditing(user)">
+          <input type="text" nz-input
+          [(ngModel)]="this.userEdit.rut"
+          [placeholder]="'Ingrese RUT...'"
+          (input)="this.inputRut($event.currentTarget)"
+          (blur)="this.blurTrim($event)" />
+        </td>
+
+        <td *ngIf="!this.isEditing(user)" nz-tooltip
+        [nzTooltipTitle]="user.nombres">
+          <span>{{ user.nombres }}</span>
+        </td>
+        <td *ngIf="this.isEditing(user)">
+          <input type="text" nz-input
+          [(ngModel)]="this.userEdit.nombres"
+          [placeholder]="'Ingrese Nombres...'"
+          (input)="this.inputName($event.currentTarget)"
+          (blur)="this.blurTrim($event)" />
+        </td>
+
+        <td *ngIf="!this.isEditing(user)" nz-tooltip
+        [nzTooltipTitle]="user.apellidoP">
+          <span>{{ user.apellidoP }}</span>
+        </td>
+        <td *ngIf="this.isEditing(user)">
+          <input type="text" nz-input
+          [(ngModel)]="this.userEdit.apellidoP"
+          [placeholder]="'Ingrese 1er Apellido...'"
+          (input)="this.inputApellidoP($event.currentTarget)"
+          (blur)="this.blurTrim($event)" />
+        </td>
+
+        <td *ngIf="!this.isEditing(user) && !user.apellidoM" nz-tooltip
+        [nzTooltipTitle]="'vacío'"
+        [ngClass]="'empty'">
+          <span>vacío</span>
+        </td>
+        <td *ngIf="!this.isEditing(user) && user.apellidoM" nz-tooltip
+        [nzTooltipTitle]="user.apellidoM">
+          <span>{{ user.apellidoM }}</span>
+        </td>
+        <td *ngIf="this.isEditing(user)">
+          <input type="text" nz-input
+          [(ngModel)]="this.userEdit.apellidoM"
+          [placeholder]="'Ingrese 2do Apellido...'"
+          (input)="this.inputApellidoM($event.currentTarget)"
+          (blur)="this.blurTrim($event)" />
+        </td>
+
+        <td *ngIf="!this.isEditing(user)" nz-tooltip
+        [nzTooltipTitle]="user.usuarioTipo.nombre">
+          <span>{{ user.usuarioTipo.nombre }}</span>
+        </td>
+        <td *ngIf="this.isEditing(user)">
+          <nz-select [(ngModel)]="this.userEdit.usuarioTipo">
+            <nz-option *ngFor="let type of this.types"
+            [nzValue]="type"
+            [nzLabel]="type.nombre">
+            </nz-option>
+
+            <!-- Default -->
+            <nz-option nzHide
+            [nzValue]="this.userEdit.usuarioTipo"
+            [nzLabel]="this.userEdit.usuarioTipo.nombre">
+            </nz-option>
+          </nz-select>
+        </td>
+
+        <!-- Acciones -->
+        <td class="actions flex-row nowrap">
+          <button nz-button nz-tooltip
+          [nzTooltipTitle]="'Editar'"
+          class="btn-primary"
+          *ngIf="!this.isEditing(user)"
+          (click)="this.edit(user)">
+            <i class="far fa-edit"></i>
+          </button>
+
+          <button nz-button nz-tooltip
+          [nzTooltipTitle]="'Cancelar'"
+          class="btn-danger"
+          *ngIf="this.isEditing(user)"
+          (click)="this.userEdit = undefined">
+            <i class="fas fa-times"></i>
+          </button>
+
+          <button nz-button nz-tooltip
+          [nzTooltipTitle]="'Eliminar'"
+          *ngIf="!this.isEditing(user)"
+          class="btn-danger"
+          (click)="this.disable(user)">
+            <i class="far fa-trash-alt"></i>
+          </button>
+
+          <button nz-button nz-tooltip
+          [nzTooltipTitle]="'Guardar'"
+          *ngIf="this.isEditing(user)"
+          [disabled]="!this.isValid()"
+          class="btn-success"
+          (click)="this.save()">
+            <i class="far fa-save"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

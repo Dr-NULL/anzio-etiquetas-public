@@ -1,0 +1,46 @@
+<div class="selector flex-row">
+  <div *ngFor="let pict of this.picts; index as i"
+  [class]="'card flex-row'"
+  (click)="this.onClick(pict)">
+    <div class="preview flex-row"
+    [style.background-image]="'url(' + pict.url + ')'">
+    </div>
+    <div class="body flex-row">
+      <strong>{{ pict.descripc }}.{{ pict.ext }}</strong>
+    </div>
+  </div>
+
+</div>
+<div class="uploader">
+  <app-uploader-drag
+  [multiple]="true"
+  [types]="[ 'bmp', 'jpg', 'jpeg', 'png' ]"
+  [(model)]="this.files">
+  </app-uploader-drag>
+
+  <div class="row">
+    <div class="col-6">
+      <button nz-button type="button" class="btn-success"
+      [disabled]="this.files.length === 0"
+      (click)="this.onUpload()">
+        <i class="fas fa-upload"></i>
+        <span>Subir archivos</span>
+      </button>
+    </div>
+    <div class="col-6">
+      <button nz-button type="button" class="btn-primary"
+      (click)="this.onClear()">
+        <i class="fas fa-broom"></i>
+        <span>Limpiar</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *nzModalFooter>
+  <button nz-button type="button" class="btn-secondary"
+  (click)="this.onClose()">
+    <i class="fas fa-times"></i>
+    <span>Cerrar</span>
+  </button>
+</div>

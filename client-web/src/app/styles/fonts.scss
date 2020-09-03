@@ -1,0 +1,14 @@
+@font-face {
+  font-family: 'Ping-Fang';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/assets/fonts/PingFang.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Code-128';
+  src: url('/assets/fonts/code128-webfont.woff2') format('woff2'),
+       url('/assets/fonts/code128-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}

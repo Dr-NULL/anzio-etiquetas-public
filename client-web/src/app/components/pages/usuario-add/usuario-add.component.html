@@ -1,0 +1,102 @@
+<nz-card [nzTitle]="'Configurar Usuario'">
+  <div class="row">
+    <div class="col-6">
+      <label>Correo Electrónico:</label>
+      <input type="text" nz-input
+      [disabled]="true"
+      [ngModel]="this.mail" />
+    </div>
+
+    <div class="col-3">
+      <label>Tipo Usuario:</label>
+      <input type="text" nz-input
+      [disabled]="true"
+      [ngModel]="this.type" />
+    </div>
+
+    <div class="col-3">
+      <label>Nombre Usuario:</label>
+      <input type="text" nz-input
+      [disabled]="true"
+      [ngModel]="this.user" />
+    </div>
+
+    <div class="col-6">
+      <label>Contraseña (*):</label>
+      <input type="password" nz-input
+      [ngClass]="(this.okPass1) ? '' : 'invalid'"
+      [ngModel]="this.pass01"
+      (input)="this.onInputPass01($event.currentTarget)"
+      (blur)="this.onBlur($event.currentTarget)" />
+    </div>
+
+    <div class="col-6">
+      <label>Confirmar Contraseña (*):</label>
+      <input type="password" nz-input nz-tooltip
+      [ngClass]="(this.okPass2) ? '' : 'invalid'"
+      [ngModel]="this.pass02"
+      (input)="this.onInputPass02($event.currentTarget)"
+      (blur)="this.onBlur($event.currentTarget)" />
+    </div>
+
+    <div class="col-3">
+      <label>RUT (*):</label>
+      <input type="text" nz-input
+      [ngClass]="(this.okRut) ? '' : 'invalid'"
+      [ngModel]="this.rut"
+      [maxLength]="12"
+      (input)="this.onInputRut($event.currentTarget)"
+      (blur)="this.onBlur($event.currentTarget)"  />
+    </div>
+
+    <div class="col-9">
+      <label>Nombres (*):</label>
+      <input type="text" nz-input
+      [ngClass]="(this.okFName) ? '' : 'invalid'"
+      [ngModel]="this.fName"
+      [maxLength]="100"
+      (input)="this.onInputFName($event.currentTarget)"
+      (blur)="this.onBlur($event.currentTarget)" />
+    </div>
+
+    <div class="col-6">
+      <label>Apellido Paterno (*):</label>
+      <input type="text" nz-input
+      [ngClass]="(this.okLName) ? '' : 'invalid'"
+      [ngModel]="this.lNameP"
+      [maxLength]="50"
+      (input)="this.onInputLNameP($event.currentTarget)"
+      (blur)="this.onBlur($event.currentTarget)" />
+    </div>
+
+    <div class="col-6">
+      <label>Apellido Materno:</label>
+      <input type="text" nz-input
+      [(ngModel)]="this.lNameM"
+      [maxLength]="50"
+      (input)="this.onInputLNameM($event.currentTarget)"
+      (blur)="this.onBlur($event.currentTarget)" />
+    </div>
+
+    <div class="col-12">
+      <p>(*) - campos obligatorios</p>
+
+      <nz-divider>
+      </nz-divider>
+
+      <button nz-button class="btn-primary action"
+      [disabled]="!this.isDone()"
+      (click)="this.onSave()">
+        <i *ngIf="!this.isWaiting"
+        class="far fa-save">
+        </i>
+
+        <i *ngIf="this.isWaiting"
+        class="fas fa-circle-notch fa-spin">
+        </i>
+
+        <span>Terminar Registro</span>
+      </button>
+    </div>
+  </div>
+</nz-card>

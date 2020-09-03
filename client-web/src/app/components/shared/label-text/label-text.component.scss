@@ -1,0 +1,74 @@
+:host {
+  box-sizing: border-box;
+  position: absolute;
+  overflow: hidden;
+}
+
+.item {
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  z-index: 10;
+  padding: 0 0.25rem;
+  overflow: hidden;
+}
+
+.border {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  opacity: 0;
+  z-index: 15;
+  cursor: pointer;
+
+  border: 2px dashed #8080f1;
+  border-collapse: collapse;
+  box-sizing: border-box;
+
+  & {
+    transition-duration: 250ms;
+    opacity: 0;
+  }
+}
+
+:host:hover .border {
+  transition-duration: 250ms;
+  opacity: 1;
+}
+
+:host.selected .border {
+  animation-name: tilt;
+  animation-iteration-count: infinite;
+  animation-duration: 500ms;
+}
+
+:host {
+  transition-duration: 250ms;
+  filter: blur(0);
+}
+
+:host.unselected {
+  transition-duration: 250ms;
+  opacity: 0.4;
+  filter: blur(2px);
+}
+
+:host.unselected:hover {
+  transition-duration: 250ms;
+  filter: blur(0);
+}
+
+@keyframes tilt {
+  0% { opacity: 1; }
+
+ 25% { opacity: 1; }
+
+ 50% { opacity: 1; }
+
+ 64% { opacity: 0.5; }
+
+ 80% { opacity: 1; }
+}

@@ -1,0 +1,131 @@
+@import "../../../styles/colors.scss";
+$size-min:  76px;
+$size-max: 320px;
+
+:host {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  width: 100%;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+
+  & > .tooltip {
+    position: absolute;
+    z-index: 100;
+    width: $size-min;
+    height: 64px;
+  }
+
+  & > .main {
+    z-index:  50;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: $size-max;
+  }
+}
+
+:host {
+  transition-duration: 250ms;
+  background-color: inherit;
+
+  & > .chld {
+    background-color: $bg-dark-02;
+  }
+}
+
+:host:hover {
+  transition-duration: 250ms;
+  background-color: $bg-primary-01;
+
+  & > .chld {
+    background-color: $bg-primary-01;
+  }
+}
+
+:host > .main:hover {
+  transition-duration: 250ms;
+  background-color: $bg-primary-01-hover;
+}
+
+.icon {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+
+  width: $size-min;
+  height: 64px;
+  font-size: 1.5rem;
+}
+
+.text {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: calc(100% - #{$size-min} - 48px);
+  height: 64px;
+  font-size: 1rem;
+}
+
+.tick {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  width: 48px;
+  height: 64px;
+  font-size: 1.5rem;
+
+  & > i {
+    position: absolute;
+  }
+
+  & > .fa-plus {
+    transition-duration: 250ms;
+    opacity: 1;
+  }
+  & > .fa-minus {
+    transition-duration: 250ms;
+    opacity: 0;
+  }
+
+  &.open > .fa-plus {
+    transition-duration: 250ms;
+    opacity: 0;
+  }
+  &.open > .fa-minus {
+    transition-duration: 250ms;
+    opacity: 1;
+  }
+}
+
+.chld {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  overflow-y: hidden;
+  width: $size-max;
+
+  & > app-side-menu-item > .main {
+    transition-duration: 250ms;
+    height: 0px;
+  }
+
+  &.open > app-side-menu-item > .main {
+    transition-duration: 250ms;
+    height: 64px;
+  }
+}

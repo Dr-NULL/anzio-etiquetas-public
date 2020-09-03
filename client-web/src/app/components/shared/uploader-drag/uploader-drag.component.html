@@ -1,0 +1,33 @@
+<input
+[type]="'file'"
+[id]="this.id"
+[accept]="this.getAcceptedExt()"
+[multiple]="this.multiple"
+(change)="this.onChange($event.target)"/>
+
+<label #container
+[class]="'container'"
+[for]="this.id">
+  <i class="icon" nz-icon nzType="inbox" nzTheme="outline"></i>
+  <h3 class="title">Haga click o arrastre a esta área sus archivos.</h3>
+  <div class="supported" *ngIf="this.types.length > 0">
+    <span>Archivos soportados: </span>
+    <span *ngFor="let type of this.types; index as i"
+    [innerText]="(i == 0) ? type : (i < this.types.length - 1) ? ', ' + type : ' o ' + type"></span>
+  </div>
+</label>
+
+<ul class="listfile">
+  <li *ngFor="let file of this.model; index as i"
+  [@insertFile]>
+    <div class="icon">
+      <i nz-icon nzType="paper-clip" nzTheme="outline"></i>
+    </div>
+    <div class="filename">
+      {{ file.name }}
+    </div>
+    <div class="remove" (click)="this.onRemoveItem(i)">
+      <i nz-icon nzType="close" nzTheme="outline"></i>
+    </div>
+  </li>
+</ul>

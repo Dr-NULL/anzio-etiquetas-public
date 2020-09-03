@@ -1,0 +1,8 @@
+# Archivos de Desarrollo
+node_modules
+dist
+
+# Archivos de Configuración
+appconfig.json
+ormconfig.json
+secret.txt

@@ -1,0 +1,39 @@
+:host .main {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 20rem);
+
+  & > .table {
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    overflow-y: auto;
+    width: calc(100% - 5rem);
+    height: 100%;
+  }
+
+  .table:nth-of-type(1) {
+    tr > th:nth-child(1)  { width: 8rem; }
+    tr > th:nth-child(2)  { width: calc(100% - 10rem); }
+    tr > th:nth-child(3) { width: 2rem; }
+  }
+
+  .table:nth-last-child(1) {
+    tr > th:nth-child(1) { width: 2rem; }
+    tr > th:nth-child(2)  { width: 8rem; }
+    tr > th:nth-child(3)  { width: calc(100% - 10rem); }
+  }
+
+  & > .button {
+    justify-content: center;
+    align-items: center;
+
+    width: 10rem;
+    height: 100%;
+
+    button {
+      margin: 1rem 0;
+    }
+  }
+}

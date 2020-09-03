@@ -1,0 +1,15 @@
+@import "../../../styles/colors.scss";
+
+.body {
+  p {
+    text-align: justify;
+  }
+}
+
+nz-select {
+  width: 100%;
+}
+
+input.error {
+  box-shadow: 0 0 0.75rem $btn-bg-danger;
+}

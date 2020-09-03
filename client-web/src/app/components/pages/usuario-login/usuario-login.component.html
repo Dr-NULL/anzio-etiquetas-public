@@ -1,0 +1,33 @@
+<nz-card [nzTitle]="'Iniciar Sesión'">
+  <div class="body row">
+    <div class="col-12">
+      <label>Usuario:</label>
+      <input nz-input
+      [maxLength]="20"
+      [placeholder]="'Ingrese su nombre de usuario aquí...'"
+      [ngModel]="this.user"
+      (input)="this.onInputUser($event.currentTarget)" />
+    </div>
+
+    <div class="col-12">
+      <label>Contraseña:</label>
+      <input nz-input type="password"
+      [maxLength]="20"
+      [placeholder]="'Ingrese su contraseña aquí...'"
+      [ngModel]="this.pass"
+      (input)="this.onInputPass($event.currentTarget)" />
+    </div>
+
+    <div class="col-12">
+      <nz-divider>
+      </nz-divider>
+
+      <button nz-button class="btn-primary btn-login"
+      [disabled]="!this.isValid()"
+      (click)="this.onLogin()">
+        <i class="fas fa-sign-in-alt"></i>
+        <span>Ingresar</span>
+      </button>
+    </div>
+  </div>
+</nz-card>

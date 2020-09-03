@@ -1,0 +1,31 @@
+<app-label-pict *ngFor="let pict of this.modelValue.formatoPict; index as i; trackBy: trackByFunc"
+[class]="(this.modelValue.formatoRect.length + this.modelValue.formatoText.length + i == this.selectionValue) ? 'selected' : (this.selectionValue != null) ? 'unselected' : ''"
+[(model)]="this.modelValue.formatoPict[i]"
+[scale]="this.scale"
+(click)="this.onClickPict(i)">
+</app-label-pict>
+
+<app-label-rect *ngFor="let rect of this.modelValue.formatoRect; index as i; trackBy: trackByFunc"
+[class]="(this.modelValue.formatoText.length + i == this.selectionValue) ? 'selected' : (this.selectionValue != null) ? 'unselected' : ''"
+[(model)]="this.modelValue.formatoRect[i]"
+[scale]="this.scale"
+(click)="this.onClickRect(i)">
+</app-label-rect>
+
+<ng-container *ngFor="let text of this.modelValue.formatoText; index as i">
+  <app-label-text
+  *ngIf="(this.modelValue.formatoText[i].printOriginal === true && this.showOriginal === true)"
+  [class]="(this.selectionValue == i) ? 'selected' : (this.selectionValue != null) ? 'unselected' : ''"
+  [(model)]="this.modelValue.formatoText[i]"
+  [scale]="this.scale"
+  (click)="this.onClickText(i)">
+  </app-label-text>
+
+  <app-label-text
+  *ngIf="(this.modelValue.formatoText[i].printCopy === true && this.showOriginal === false)"
+  [class]="(this.selectionValue == i) ? 'selected' : (this.selectionValue != null) ? 'unselected' : ''"
+  [(model)]="this.modelValue.formatoText[i]"
+  [scale]="this.scale"
+  (click)="this.onClickText(i)">
+  </app-label-text>
+</ng-container>

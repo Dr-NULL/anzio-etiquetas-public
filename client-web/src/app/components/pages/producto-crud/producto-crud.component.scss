@@ -1,0 +1,91 @@
+@import "../../../styles/grid.scss";
+
+:host {
+  width: 100%;
+  height: 100%;
+
+  .content {
+    width: 100%;
+  }
+
+  @media screen and (min-width: $size-lg) {
+    .content, .content > div {
+      height: 100%;
+    }
+
+    nz-card {
+      height: 100%;
+
+      &::ng-deep .ant-card-head-title {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 1rem;
+        width: 100%;
+        height: 4rem;
+      }
+
+      &::ng-deep .ant-card-body {
+        overflow-y: auto;
+        height: calc(100vh - 9.05rem);
+      }
+    }
+  }
+}
+
+.card-lang-title {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+}
+
+.tbl-lang {
+  tr {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  $opt-width: 10rem;
+  tr > *:nth-child(1) { width: calc((100% - #{$opt-width}) * 0.3); }
+  tr > *:nth-child(2) { width: calc((100% - #{$opt-width}) * 0.7); }
+  tr > *:nth-child(3) { width: $opt-width; }
+
+  tr > th, tr > td {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 3rem;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+
+  tr > td > span {
+    height: 2rem;
+    padding: 0.4rem;
+  }
+
+  tr > td > input {
+    height: 2rem;
+    padding: 0.4rem 0.3rem;
+  }
+
+  button {
+    width: 3rem;
+    height: 2rem;
+    padding: 0;
+
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+}

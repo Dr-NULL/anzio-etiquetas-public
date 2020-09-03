@@ -1,0 +1,131 @@
+<div class="row content">
+  <div class="col-md-12 col-lg-6">
+    <nz-card [nzTitle]="'Productos:'">
+      <app-search-table
+      [keys]="[ 'familia.descripc', 'codigo', 'descripc' ]"
+      [input]="this.arrProd"
+      (output)="this.filterProd($event)">
+      </app-search-table>
+
+      <nz-table #tableProd
+      [nzData]="this.arrProdFilter"
+      [nzPageSize]="10">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Familia</th>
+            <th>Descripción</th>
+            <th>Editar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tableProd.data">
+            <td>{{ item.codigo }}</td>
+            <td>{{ item.familia.descripc }}</td>
+            <td>{{ item.descripc }}</td>
+            <td>
+              <button nz-button
+              class="btn-primary"
+              (click)="this.onEditProd(item)">
+                <i class="far fa-edit"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-card>
+  </div>
+
+  <div class="col-md-12 col-lg-6">
+    <ng-template #card_lang_title>
+      <div class="card-lang-title">
+        <span>Idiomas:</span>
+
+        <button nz-button
+        class="btn-primary"
+        [disabled]="this.selLang != null"
+        (click)="this.onAddLang()">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
+    </ng-template>
+
+    <nz-card [nzTitle]="card_lang_title">
+      <app-search-table
+      [keys]="[ 'codigo', 'descripc' ]"
+      [input]="this.arrLang"
+      (output)="this.filterLang($event)">
+      </app-search-table>
+
+      <nz-table #tableLang
+      class="tbl-lang"
+      [nzData]="this.arrLangFilter">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tableLang.data">
+            <td>
+              <span
+              *ngIf="!this.checkLang(item)">
+                {{ item.codigo }}
+              </span>
+
+              <input nz-input
+              *ngIf="this.checkLang(item)"
+              [maxLength]="10"
+              [ngModel]="this.selLang.codigo"
+              (input)="this.onKeyUpCodigo($event.currentTarget)" />
+            </td>
+
+            <td>
+              <span
+              *ngIf="!this.checkLang(item)">
+                {{ item.descripc }}
+              </span>
+
+              <input nz-input
+              *ngIf="this.checkLang(item)"
+              [maxLength]="50"
+              [ngModel]="this.selLang.descripc"
+              (input)="this.onKeyUpDescripc($event.currentTarget)" />
+            </td>
+
+            <td class="flex-row nowrap">
+              <button nz-button class="btn-primary"
+              *ngIf="!this.checkLang(item)"
+              [disabled]="item.default"
+              (click)="this.onEditLang(item)">
+                <i class="far fa-edit"></i>
+              </button>
+
+              <button nz-button class="btn-danger"
+              *ngIf="!this.checkLang(item)"
+              [disabled]="item.default"
+              (click)="this.onDeleteLang(item)">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+
+              <button nz-button class="btn-danger"
+              *ngIf="this.checkLang(item)"
+              (click)="this.onCancelLang()">
+                <i class="fas fa-times"></i>
+              </button>
+
+              <button nz-button class="btn-success"
+              *ngIf="this.checkLang(item)"
+              [disabled]="this.checkValidation()"
+              (click)="this.onSaveLang()">
+                <i class="far fa-save"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-card>
+  </div>
+</div>

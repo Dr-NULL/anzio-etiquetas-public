@@ -1,0 +1,16 @@
+<div #item class="item"
+[style.width]="this.modelView.width + 'px'"
+[style.height]="(this.modelView.height + this.marginTop) + 'px'"
+[style.textAlign]="this.modelView.align"
+[style.fontFamily]="this.modelView.fuente.fontFace"
+[style.fontSize]="this.modelView.fontSize + 'pt'"
+[style.marginTop]="'-' + this.marginTop + 'px'"
+[innerHTML]="this.modelView.text"
+(click)="this.onSelectedEvent()">
+</div>
+
+<div class="border"
+[style.width]="this.modelView.width + 'px'"
+[style.height]="this.modelView.height + 'px'">
+
+</div>

@@ -1,0 +1,28 @@
+<nz-content class="menu"
+[ngClass]="(this.expanded) ? 'expanded' : ''">
+  <div class="list">
+    <!-- Invocar plantilla -->
+    <app-side-menu-item #listItem
+    *ngFor="let item of this.menu" [model]="item">
+    </app-side-menu-item>
+  </div>
+
+  <!-- Botón para conmutar el estado del menú -->
+  <div class="conm no-select"
+  (click)="this.expanded = !this.expanded">
+    <i class="fas fa-angle-right"></i>
+    <span>Ocultar</span>
+  </div>
+</nz-content>
+
+<!-- Contenido de la Página -->
+<nz-content class="cont"
+[ngClass]="(this.expanded) ? 'expanded' : ''"
+(click)="this.expanded = false">
+  <!-- Body here -->
+
+  <div class="placeholder" [@fadeAnime]="this.getRouterOutletState(o)">
+    <router-outlet #o="outlet">
+    </router-outlet>
+  </div>
+</nz-content>

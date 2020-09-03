@@ -1,0 +1,18 @@
+<div class="main {{ this.type }}">
+  <div class="icon">
+    <i class="fas fa-info-circle" *ngIf="this.type == 'info'"></i>
+    <i class="fas fa-check-circle" *ngIf="this.type == 'success'"></i>
+    <i class="fas fa-exclamation-circle" *ngIf="this.type == 'danger'"></i>
+  </div>
+  <div class="text"
+  [innerHTML]="this.html">
+  </div>
+</div>
+<div *nzModalFooter>
+  <button nz-button *ngFor="let btn of this.btns"
+  [class]="(btn.type != null) ? 'btn-' + btn.type : 'btn-primary'"
+  (click)="this.onClick(btn)">
+    <i *ngIf="btn.faicon != null" [class]="btn.faicon"></i>
+    <span *ngIf="btn.text != null">{{ btn.text }}</span>
+  </button>
+</div>

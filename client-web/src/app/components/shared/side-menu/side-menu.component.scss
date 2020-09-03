@@ -1,0 +1,174 @@
+@import "../../../styles/colors.scss";
+$size-min:  76px;
+$size-max: 320px;
+
+* {
+  box-sizing: border-box;
+}
+
+/** EMPLAZAMIENTO GENERAL **/
+:host {
+  width: 100vw;
+  height: calc(100vh - 64px);
+  display: flex;
+  flex-flow: row nowrap;
+
+  & > * {
+    height: 100%;
+  }
+}
+
+.menu {
+  z-index: 10;
+  width: $size-min;
+  color: $fg-01;
+  background-color: $bg-dark-01;
+
+  & {
+    transition-duration: 250ms;
+    width: $size-min;
+    box-shadow: 0;
+  }
+
+  &.expanded {
+    transition-duration: 250ms;
+    width: $size-max;
+    box-shadow: 0 4rem 2rem 2rem rgba(0, 0, 0, 0.5);
+  }
+}
+
+.cont {
+  z-index: 5;
+  background-color: $bg-02;
+  width: calc(100vw - #{$size-min});
+  overflow: hidden;
+  background-color: $bg-dark-02;
+
+  & > .placeholder {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    width: calc(100vw - #{$size-min});
+    height: 100%;
+
+    &::ng-deep > *:not(router-outlet) {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      color: $fg-01;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  & {
+    transition-duration: 250ms;
+    width: calc(100vw - #{$size-min});
+  }
+
+  &.expanded {
+    transition-duration: 250ms;
+    width: calc(100vw - #{$size-max});
+  }
+}
+
+/** SUB ELEMENTOS MENÚ **/
+.menu {
+  & > .list {
+    width: 100%;
+    height: calc(100% - 64px);
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  & > .conm {
+    position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    overflow: hidden;
+    width: 100%;
+    height: 64px;
+    font-size: 2rem;
+    color: $fg-01;
+    background-color: $bg-dark-01;
+
+    & {
+      transition-duration: 250ms;
+      background-color: $bg-dark-01;
+    }
+
+    &:hover {
+      transition-duration: 250ms;
+      background-color: $bg-primary-01;
+    }
+
+    & > i, & > span {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+    }
+
+    & > i {
+      transition-duration: 250ms;
+      transform: rotate(  0deg);
+      position: absolute;
+      left: 0;
+      top: 0;
+
+      width: $size-min;
+      height: 64px;
+    }
+
+    & > span {
+      font-size: 1.5rem;
+    }
+
+    & > span {
+      transition-duration: 250ms;
+      position: absolute;
+      left: $size-min;
+      top: 0;
+
+      opacity: 0;
+      height: 64px;
+    }
+  }
+
+  &.expanded > .conm {
+    & > i{
+      transition-duration: 250ms;
+      transform: rotate(180deg);
+      left: 4.5rem;
+    }
+
+    & > span {
+      transition-duration: 250ms;
+      left: 8.25rem;
+      opacity: 1;
+    }
+  }
+}
+
+/** ELEMENTOS MENÚ **/
+.menu > .list {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  app-side-menu-item {
+    width: $size-max;
+  }
+}

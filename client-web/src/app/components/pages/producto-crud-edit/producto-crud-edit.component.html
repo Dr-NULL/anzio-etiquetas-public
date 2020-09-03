@@ -1,0 +1,114 @@
+<div class="main flex-row nowrap">
+  <div class="table">
+    <h3>Idiomas:</h3>
+
+    <app-search-table
+    [keys]=""
+    [input]="this.arrLang"
+    (output)="this.filterLang($event)">
+    </app-search-table>
+
+    <nz-table #tblLang [nzData]="this.arrLangFilter">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descripc</th>
+          <th>
+            <label nz-checkbox
+            [(ngModel)]="this.chkLang"
+            (ngModelChange)="this.selectAllLang()">
+            </label>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of tblLang.data">
+          <td>{{ item.value.codigo }}</td>
+          <td>{{ item.value.descripc }}</td>
+          <td>
+            <label nz-checkbox
+            [nzDisabled]="item.default"
+            [(ngModel)]="item.checked"
+            (ngModelChange)="this.checkSelections()">
+            </label>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <div class="button flex-col">
+    <button nz-button class="btn-primary"
+    [disabled]="!this.canAdd()"
+    (click)="this.addLang()">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <button nz-button class="btn-danger"
+    [disabled]="!this.canRem()"
+    (click)="this.delLang()">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+  </div>
+
+  <div class="table">
+    <h3>Descripciones:</h3>
+
+    <app-search-table
+    [keys]="[ 'value.language.codigo', 'value.descripc' ]"
+    [input]="this.arrDesc"
+    (output)="this.filterDesc($event)">
+    </app-search-table>
+
+    <nz-table #tblDesc
+    [nzData]="this.arrDescFilter">
+      <thead>
+        <tr>
+          <th>
+            <label nz-checkbox
+            [(ngModel)]="this.chkDesc"
+            (ngModelChange)="this.selectAllDesc()">
+            </label>
+          </th>
+          <th>Idioma.</th>
+          <th>Descripc.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of tblDesc.data">
+          <td>
+            <label nz-checkbox
+            [nzDisabled]="item.value.language.default"
+            [(ngModel)]="item.checked"
+            (ngModelChange)="this.checkSelections()">
+            </label>
+          </td>
+          <td>{{ item.value.language.codigo }}</td>
+          <td>
+            <input nz-input
+            [disabled]="item.value.language.default"
+            [max]="256"
+            [(ngModel)]="item.value.descripc"
+            (ngModelChange)="this.validate()"
+            (blur)="this.validate($event.currentTarget)" />
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>
+
+<ng-template nzModalFooter>
+  <button nz-button class="btn-success"
+  [disabled]="!this.chkSave"
+  (click)="this.onSave()">
+    <i class="far fa-save"></i>
+    <span>Guardar</span>
+  </button>
+
+  <button nz-button class="btn-danger"
+  (click)="this.onCancel()">
+    <i class="fas fa-times"></i>
+    <span>Cancelar</span>
+  </button>
+</ng-template>

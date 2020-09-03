@@ -1,0 +1,165 @@
+<nz-card [nzTitle]="'Gestor de Formatos de Etiquetas'" class="container">
+  <app-search-table
+  [keys]="[ 'codigo', 'descripc' ]"
+  [input]="this.model"
+  (output)="this.onFilter($event)">
+  </app-search-table>
+
+  <nz-table #tblMain
+  [nzData]="this.modelFilter">
+    <thead>
+      <tr class="list-row flex-row nowrap">
+        <th>Código.</th>
+        <th>Descripción.</th>
+        <th>Ancho (mm)</th>
+        <th>Alto (mm)</th>
+        <th>Activo</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="list-row flex-row nowrap" *ngFor="let item of tblMain.data">
+        <td>
+          <span *ngIf="!this.check(item)">
+            {{ item.codigo }}
+          </span>
+
+          <input nz-input *ngIf="this.check(item)"
+          [(ngModel)]="item.codigo"
+          (input)="this.checkCodigo($event.currentTarget)"
+          (blur)="this.onBlur()" />
+        </td>
+
+        <td>
+          <span *ngIf="!this.check(item)">
+            {{ item.descripc }}
+          </span>
+
+          <input nz-input *ngIf="this.check(item)"
+          [(ngModel)]="item.descripc"
+          (input)="this.checkDescripc($event.currentTarget)"
+          (blur)="this.onBlur()" />
+        </td>
+
+        <td>
+          <span *ngIf="!this.check(item)">
+            {{ item.width }}
+          </span>
+
+          <app-cmd-input *ngIf="this.check(item)"
+          [isNumeric]="true"
+          [min]="0"
+          [max]="200"
+          [precision]="0"
+          [(model)]="item.width"
+          (modelChange)="this.onBlur()">
+          </app-cmd-input>
+        </td>
+
+        <td>
+          <span *ngIf="!this.check(item)">
+            {{ item.height }}
+          </span>
+
+          <app-cmd-input *ngIf="this.check(item)"
+          [isNumeric]="true"
+          [min]="0"
+          [max]="200"
+          [precision]="0"
+          [(model)]="item.height"
+          (modelChange)="this.onBlur()">
+          </app-cmd-input>
+        </td>
+
+        <td>
+          <div class="flex-row">
+            <nz-switch
+            nzLoading
+            *ngIf="!this.check(item)"
+            [ngModel]="item.isActive">
+            </nz-switch>
+
+            <nz-switch
+            *ngIf="this.check(item)"
+            [(ngModel)]="item.isActive">
+            </nz-switch>
+          </div>
+        </td>
+
+        <td>
+          <div class="flex-row">
+            <button nz-button class="btn btn-primary"
+            *ngIf="!this.check(item)"
+            (click)="this.onEdit(item)">
+              <i class="far fa-edit"></i>
+            </button>
+
+            <button nz-button class="btn btn-secondary"
+            *ngIf="!this.check(item)"
+            nz-popover
+            [nzPopoverTitle]="'Opciones'"
+            [nzPopoverContent]="popOver">
+              <i class="fas fa-ellipsis-h"></i>
+            </button>
+
+            <button nz-button class="btn btn-danger"
+            *ngIf="this.check(item)"
+            (click)="this.onCancel()">
+              <i class="fas fa-times"></i>
+            </button>
+
+            <button nz-button class="btn btn-success"
+            *ngIf="this.check(item)"
+            [disabled]="!this.canSave()"
+            (click)="this.onSave(item)">
+              <i class="far fa-save"></i>
+            </button>
+
+            <ng-template #popOver>
+              <nz-list>
+                <nz-list-item>
+                  <a class="list-item"
+                  [routerLink]="'/formato/edit/' + item.codigo">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>Editar Plantilla.</span>
+                  </a>
+                </nz-list-item>
+                <nz-list-item>
+                  <a class="list-item"
+                  (click)="this.setPrinters(item.id)">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>Asignar Impresoras.</span>
+                  </a>
+                </nz-list-item>
+                <nz-list-item>
+                  <a class="list-item"
+                  (click)="this.setProducts(item.id)">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>Asignar Productos.</span>
+                  </a>
+                </nz-list-item>
+                <nz-list-item>
+                  <a class="list-item remove"
+                  (click)="this.remove(item)">
+                    <i class="far fa-trash-alt"></i>
+                    <span>Eliminar Formato.</span>
+                  </a>
+                </nz-list-item>
+              </nz-list>
+            </ng-template>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="6">
+          <button nz-button class="btn btn-primary"
+          [disabled]="!this.canAdd()"
+          (click)="this.addNew()">
+            <i class="fas fa-plus"></i>
+            <span>Nuevo Formato</span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>

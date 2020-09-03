@@ -1,0 +1,10 @@
+<div class="icon">
+  <ng-template #indicatorTemplate>
+    <i nz-icon nzType="loading" style="font-size: 6rem;"></i>
+  </ng-template>
+  <nz-spin nzSimple [nzIndicator]="indicatorTemplate"> </nz-spin>
+</div>
+<div class="text">
+  <h1>{{ this.title }}</h1>
+  <h3>{{ this.message }}</h3>
+</div>

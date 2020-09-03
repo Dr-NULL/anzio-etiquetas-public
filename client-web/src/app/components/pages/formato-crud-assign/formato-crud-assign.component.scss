@@ -1,0 +1,40 @@
+:host .body {
+  margin: -1.5rem 0;
+
+  & > .lateralus {
+    width: calc(50% - 2.5rem);
+
+    h3 {
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      height: 2rem;
+
+      & > * {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+      }
+
+      strong {
+        justify-content: flex-start;
+        width: calc(100% - 2rem);
+      }
+    }
+  }
+
+  & > .center {
+    justify-content: center;
+    align-items: center;
+
+    width: 5rem;
+    height: calc(100vh - 22rem);
+
+    button {
+      margin: 1rem 0;
+      width: 3rem;
+      height: 3rem;
+
+    }
+  }
+}

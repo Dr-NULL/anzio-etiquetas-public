@@ -1,0 +1,132 @@
+:host {
+  box-sizing: border-box;
+  display: flex;
+}
+
+:host nz-card {
+  filter: blur(0);
+  opacity: 1;
+}
+
+:host nz-card {
+  transition-duration: 250ms;
+  filter: blur(0);
+  opacity: 1;
+}
+
+:host nz-card.blur  {
+  transition-duration: 250ms;
+  filter: blur(2px);
+  opacity: 0.5;
+}
+
+nz-input-number, nz-select {
+  width: 100%;
+}
+
+$width: 22rem;
+$height: 17.2rem;
+$input-width: 6rem;
+
+.root {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  & > .text {
+    width: 100%;
+  }
+
+  & > .other {
+    width: calc(100% - #{$width});
+  }
+}
+
+.gizmo {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  padding: 0.5rem;
+  width: $width;
+  max-height: $height;
+
+  nz-slider {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+
+    &::ng-deep .ant-slider {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: center;
+      margin: 0!important;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  nz-input-group::ng-deep .ant-input-group-addon {
+    width: 2rem;
+    padding: 0;
+  }
+
+  & > label {
+    width: 100%;
+  }
+
+  & > .axis {
+    width: $input-width;
+  }
+
+  & > .x-axis {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: stretch;
+    align-items: center;
+
+    width: calc(100% - #{$input-width});
+    height: 4rem;
+
+    & > nz-input-group {
+      width: $input-width;
+    }
+
+    & > nz-slider {
+      width: calc(100% - #{$input-width});
+      height: 2rem;
+      padding: 0 1rem;
+    }
+  }
+
+  & > .y-axis {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: stretch;
+    align-items: center;
+
+    width: $input-width;
+    height: 11rem;
+
+    & > nz-input-group {
+      width: $input-width;
+      height: 2rem;
+    }
+
+    & > nz-slider {
+      width: calc(#{$input-width} / 2);
+      height: calc(100% - 2rem);
+      padding: 1rem 0;
+    }
+  }
+
+  & > app-ang-knob {
+    flex: 1;
+    padding-left: 1rem;
+    padding-top: 1rem;
+  }
+}

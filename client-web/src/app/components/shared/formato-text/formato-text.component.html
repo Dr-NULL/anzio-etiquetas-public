@@ -1,0 +1,178 @@
+<nz-card
+[id]="'card-' + this.index"
+[class]="((this.selected != null) && (this.selected != this.index)) ? 'blur' : ''">
+  <div class="root">
+    <div class="text">
+      <label>Texto:</label>
+      <textarea nz-input
+      [rows]="4"
+      [(ngModel)]="this.model.text"
+      (ngModelChange)="this.onChange()"
+      (focus)="this.onFocus()"
+      (blur)="this.onBlur()">
+      </textarea>
+    </div>
+
+    <div class="gizmo">
+      <label>Manipular:</label>
+
+      <div class="axis">
+        <nz-input-group
+        nzAddOnBefore="x">
+          <nz-input-number
+          [nzStep]="this.step"
+          [nzMin]="0"
+          [nzMax]="this.lateralus"
+          (nzFocus)="this.onFocus()"
+          (nzBlur)="this.onBlur()"
+          [(ngModel)]="this.model.x"
+          (ngModelChange)="this.onChange()">
+          </nz-input-number>
+        </nz-input-group>
+
+        <nz-input-group
+        nzAddOnBefore="y">
+          <nz-input-number
+          [nzStep]="this.step"
+          [nzMin]="0"
+          [nzMax]="this.lateralus"
+          [(ngModel)]="this.model.y"
+          (ngModelChange)="this.onChange()"
+          (nzFocus)="this.onFocus()"
+          (nzBlur)="this.onBlur()">
+          </nz-input-number>
+        </nz-input-group>
+      </div>
+
+      <div class="x-axis">
+        <nz-slider
+        [nzTooltipVisible]="'never'"
+        [nzMin]="0"
+        [nzMax]="this.width"
+        [nzStep]="this.step"
+        [(ngModel)]="this.model.x"
+        (ngModelChange)="this.onChange()"
+        (click)="this.onFocus()">
+        </nz-slider>
+
+        <nz-slider
+        [nzTooltipVisible]="'never'"
+        [nzMin]="0"
+        [nzMax]="this.lateralus"
+        [nzStep]="this.step"
+        [(ngModel)]="this.model.width"
+        (ngModelChange)="this.onChange()"
+        (click)="this.onFocus()">
+        </nz-slider>
+
+        <nz-input-group
+        nzAddOnBeforeIcon="column-width">
+          <nz-input-number
+          [nzStep]="this.step"
+          [nzMin]="0"
+          [nzMax]="this.lateralus"
+          (nzFocus)="this.onFocus()"
+          (nzBlur)="this.onBlur()"
+          [(ngModel)]="this.model.width"
+          (ngModelChange)="this.onChange()">
+          </nz-input-number>
+        </nz-input-group>
+      </div>
+
+      <div class="y-axis">
+        <nz-slider nzVertical
+        reverse="true"
+        [nzTooltipVisible]="'never'"
+        [nzMin]="0"
+        [nzMax]="this.height"
+        [nzStep]="this.step"
+        [ngModel]="this.height - this.model.y"
+        (ngModelChange)="this.model.y = this.height - $event"
+        (ngModelChange)="this.onChange()"
+        (click)="this.onFocus()">
+        </nz-slider>
+
+        <nz-slider nzVertical
+        reverse="true"
+        [nzTooltipVisible]="'never'"
+        [nzMin]="0"
+        [nzMax]="this.height"
+        [nzStep]="this.step"
+        [ngModel]="this.height - this.model.height"
+        (ngModelChange)="this.model.height = this.height - $event"
+        (ngModelChange)="this.onChange()"
+        (click)="this.onFocus()">
+        </nz-slider>
+
+        <nz-input-group
+        nzAddOnBeforeIcon="column-height">
+          <nz-input-number
+          [nzStep]="this.step"
+          [nzMin]="0"
+          [nzMax]="this.lateralus"
+          [(ngModel)]="this.model.height"
+          (nzFocus)="this.onFocus()"
+          (nzBlur)="this.onBlur()"
+          (ngModelChange)="this.onChange()">
+          </nz-input-number>
+        </nz-input-group>
+      </div>
+
+      <app-ang-knob
+      [knobSize]="'7.98rem'"
+      [(model)]="this.model.angle">
+      </app-ang-knob>
+    </div>
+
+    <div class="other row">
+      <div class="col-12">
+        <label>Tipo Fuente:</label>
+        <nz-select
+        [(ngModel)]="this.model.fuente.id"
+        (ngModelChange)="this.onChange()"
+        (focus)="this.onFocus()"
+        (blur)="this.onBlur()">
+          <nz-option *ngFor="let fuente of this.fuentes"
+          [nzValue]="fuente.id"
+          [nzLabel]="fuente.nombre">
+          </nz-option>
+        </nz-select>
+      </div>
+
+      <div class="col-12">
+        <label>Tamaño Fuente:</label>
+        <nz-input-number
+        [nzStep]="1"
+        [nzMin]="0"
+        [nzMax]="(this.width >= this.height) ? this.width : this.height"
+        (nzFocus)="this.onFocus()"
+        [(ngModel)]="this.model.fontSize"
+        (ngModelChange)="this.onChange()"
+        (nzBlur)="this.onBlur()">
+        </nz-input-number>
+      </div>
+
+      <div class="col-12">
+        <label>Alineación:</label>
+        <nz-select nz-input
+        [(ngModel)]="this.model.align"
+        (ngModelChange)="this.onChange()"
+        (focus)="this.onFocus()"
+        (blur)="this.onBlur()">
+          <nz-option [nzValue]="'left'" [nzLabel]="'Izquierda'"></nz-option>
+          <nz-option [nzValue]="'center'" [nzLabel]="'Centro'"></nz-option>
+          <nz-option [nzValue]="'right'" [nzLabel]="'Derecha'"></nz-option>
+          <nz-option [nzValue]="'justify'" [nzLabel]="'Justificado'"></nz-option>
+        </nz-select>
+      </div>
+
+      <div class="col-12">
+        <label>Ver en:</label>
+        <div class="flex-row nowrap">
+          <label nz-checkbox [(ngModel)]="this.model.printOriginal">Original</label>
+          <label nz-checkbox [(ngModel)]="this.model.printCopy">Copias</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</nz-card>

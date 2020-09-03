@@ -1,0 +1,59 @@
+<div class="body">
+  <!-- Indicaciones -->
+  <p>Para crear un nuevo usuario, debe de asignarle un nick, correo y tipo de usuario. La persona recibirá un correo de confirmación con un enlace que validará la creación del usuario, y además le permitirá ingresar sus datos.</p>
+
+  <!-- Campos -->
+  <div class="row">
+    <div class="col-md-12 col-lg-6">
+      <label>Nombre Usuario:</label>
+      <input type="text" nz-input
+      [ngModel]="this.user"
+      (input)="this.inputUser($event.currentTarget)"
+      (blur)="this.blurUser($event.currentTarget)" />
+    </div>
+
+    <div class="col-md-12 col-lg-6">
+      <label>Tipo Usuario:</label>
+      <nz-select [(ngModel)]="this.type">
+        <nz-option *ngFor="let item of this.types"
+        [nzValue]="item"
+        [nzLabel]="item.nombre">
+        </nz-option>
+      </nz-select>
+    </div>
+
+    <div class="col-12">
+      <label>E-Mail:</label>
+      <input type="text" nz-input
+      [ngModel]="this.mail"
+      (input)="this.inputMail($event.currentTarget)"
+      (blur)="this.blurMail($event.currentTarget)" />
+    </div>
+  </div>
+</div>
+
+<div *nzModalFooter>
+  <button nz-button
+  type="button"
+  class="btn-success"
+  [disabled]="!this.isUserValid || !this.isMailValid"
+  (click)="this.create()">
+    <i *ngIf="!this.isWaiting"
+    class="far fa-save">
+    </i>
+
+    <i *ngIf="this.isWaiting"
+    class="fas fa-circle-notch fa-spin">
+    </i>
+
+    <span>Guardar</span>
+  </button>
+
+  <button nz-button
+  type="button"
+  class="btn-danger"
+  (click)="this.dismiss()">
+    <i class="fas fa-times"></i>
+    <span>Cancelar</span>
+  </button>
+</div>

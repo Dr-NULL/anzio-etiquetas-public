@@ -1,0 +1,25 @@
+:host {
+  box-sizing: border-box;
+  display: flex;
+}
+
+:host nz-card {
+  filter: blur(0);
+  opacity: 1;
+}
+
+:host nz-card {
+  transition-duration: 250ms;
+  filter: blur(0);
+  opacity: 1;
+}
+
+:host nz-card.blur  {
+  transition-duration: 250ms;
+  filter: blur(2px);
+  opacity: 0.5;
+}
+
+nz-input-number {
+  width: 100%;
+}

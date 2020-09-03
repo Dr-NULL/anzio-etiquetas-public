@@ -1,0 +1,109 @@
+<nz-card
+[id]="'card-' + this.index"
+[class]="((this.selected != null) && (this.selected != this.index)) ? 'blur' : ''">
+  <div class="row">
+    <div class="col-12">
+      <label>Posición Horizontal (mm):</label>
+      <div class="row">
+        <div class="col-6">
+          <nz-slider nzRange
+          [nzTooltipVisible]="'never'"
+          [nzMin]="0"
+          [nzMax]="this.width"
+          [nzStep]="this.step"
+          [ngModel]="[ this.model.x, this.model.x + this.model.width ]"
+          (ngModelChange)="this.model.x      = $event[0];"
+          (ngModelChange)="this.model.width  = $event[1] - $event[0]"
+          (ngModelChange)="this.onChange()"
+          (click)="this.onFocus()">
+          </nz-slider>
+        </div>
+
+        <nz-input-group
+        class="col-3"
+        nzAddOnBefore="x">
+          <nz-input-number
+          [nzStep]="this.step"
+          [nzMin]="0"
+          [nzMax]="this.width"
+          [(ngModel)]="this.model.x"
+          (ngModelChange)="this.onChange()"
+          (nzFocus)="this.onFocus()"
+          (nzBlur)="this.onBlur()">
+          </nz-input-number>
+        </nz-input-group>
+
+        <nz-input-group
+        class="col-3"
+        nzAddOnBeforeIcon="column-width">
+          <nz-input-number
+          [nzStep]="this.step"
+          [nzMin]="0"
+          [nzMax]="this.width"
+          [(ngModel)]="this.model.width"
+          (ngModelChange)="this.onChange()"
+          (nzFocus)="this.onFocus()"
+          (nzBlur)="this.onBlur()">
+          </nz-input-number>
+        </nz-input-group>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <label>Posición Vertical (mm):</label>
+      <div class="row">
+        <div class="col-6">
+          <nz-slider nzRange
+          [nzTooltipVisible]="'never'"
+          [nzMin]="0"
+          [nzMax]="this.height"
+          [nzStep]="this.step"
+          [ngModel]="[ this.model.y, this.model.y + this.model.height ]"
+          (ngModelChange)="this.model.y       = $event[0]"
+          (ngModelChange)="this.model.height  = $event[1] - $event[0]"
+          (ngModelChange)="this.onChange()"
+          (click)="this.onFocus()">
+          </nz-slider>
+        </div>
+
+        <nz-input-group
+        class="col-3"
+        nzAddOnBefore="y">
+          <nz-input-number
+          [nzStep]="this.step"
+          [nzMin]="0"
+          [nzMax]="this.height"
+          [(ngModel)]="this.model.y"
+          (ngModelChange)="this.onChange()"
+          (nzFocus)="this.onFocus()"
+          (nzBlur)="this.onBlur()">
+          </nz-input-number>
+        </nz-input-group>
+
+        <nz-input-group
+        class="col-3"
+        nzAddOnBeforeIcon="column-height">
+          <nz-input-number
+          [nzStep]="this.step"
+          [nzMin]="0"
+          [nzMax]="this.height"
+          [(ngModel)]="this.model.height"
+          (ngModelChange)="this.onChange()"
+          (nzFocus)="this.onFocus()"
+          (nzBlur)="this.onBlur()">
+          </nz-input-number>
+        </nz-input-group>
+      </div>
+    </div>
+
+    <div class="col-12 filename">
+      <button nz-button nzType="primary" nzShape="circle"
+      (click)="this.onSelectFile()">
+        <i nz-icon [nzType]="(this.model.picture != null) ? 'swap' : 'plus'" nzTheme="outline"></i>
+      </button>
+      <input nz-input
+      [readOnly]="true"
+      [ngModel]="(this.model.picture != null) ? this.model.picture.descripc : 'Para cargar una imagen, pinche en el botón de la izquierda.'">
+    </div>
+  </div>
+</nz-card>

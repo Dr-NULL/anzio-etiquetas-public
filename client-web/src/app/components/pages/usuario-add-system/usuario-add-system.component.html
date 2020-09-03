@@ -1,0 +1,35 @@
+<nz-card [nzTitle]="'Configurar usuario System'">
+  <div class="row">
+    <div class="col-12">
+      <p class="explanation">Es necesario crear un usuario del tipo <strong>System</strong> en el sistema. Cumple el mismo propósito que el tipo de usuario <strong>Administrador</strong>, solo que a diferencia de este último, sí puede gestionar a los usuarios Administradores.</p>
+    </div>
+
+    <div class="col-12">
+      <label>Nombre Usuario:</label>
+      <input nz-input
+      [maxlength]="20"
+      [ngModel]="this.user"
+      (input)="this.onInputUser($event.currentTarget)" />
+    </div>
+
+    <div class="col-12">
+      <label>Correo Electrónico:</label>
+      <input nz-input
+      [maxlength]="100"
+      [ngModel]="this.mail"
+      (input)="this.onInputMail($event.currentTarget)" />
+    </div>
+
+    <div class="col-12">
+      <nz-divider>
+      </nz-divider>
+
+      <button nz-button class="btn-primary btn-action"
+      [disabled]="!this.isValid"
+      (click)="this.onSave()">
+        <i class="fas fa-envelope-open-text"></i>
+        <span>Registrar Correo</span>
+      </button>
+    </div>
+  </div>
+</nz-card>

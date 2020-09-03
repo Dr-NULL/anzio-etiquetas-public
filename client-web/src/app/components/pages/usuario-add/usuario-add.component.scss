@@ -1,0 +1,20 @@
+:host {
+  justify-content: center!important;
+  align-items: center!important;
+
+  & > nz-card {
+    width: 40vw;
+    min-width: 25rem;
+  }
+}
+
+input.invalid {
+  transition-duration: 250ms;
+  border-color: #c30000;
+  box-shadow: 0 0 0.5rem rgb(195, 0, 0, 0.5);
+}
+
+button.action {
+  width: 100%;
+  font-size: 1rem;
+}

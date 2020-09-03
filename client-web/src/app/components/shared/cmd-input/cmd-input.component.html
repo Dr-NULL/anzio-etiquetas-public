@@ -1,0 +1,15 @@
+<nz-input-group [nzAddOnBefore]="(this.copy != null) ? btn : null">
+  <input #input nz-input
+  [type]="'text'"
+  [ngModel]="this.model"
+  [placeholder]="(this.placeholder) ? this.placeholder : ''"
+  [readOnly]="this.readonly"
+  (keyup)="this.onChange($event)"
+  (blur)="this.onBlur($event.currentTarget)" />
+</nz-input-group>
+
+<ng-template #btn>
+  <i class="far fa-copy"></i>
+  <div class="trigger" (click)="this.onCopy()">
+  </div>
+</ng-template>

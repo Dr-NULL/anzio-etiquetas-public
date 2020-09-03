@@ -1,0 +1,38 @@
+@import "../../../styles/colors.scss";
+$icon-size: 8rem;
+
+:host {
+  .main {
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    &.info .icon i {
+      color: $btn-bg-primary;
+    }
+
+    &.success .icon i {
+      color: $btn-bg-success;
+    }
+
+    &.danger .icon i {
+      color: $btn-bg-danger;
+    }
+
+    & > .icon {
+      width: $icon-size;
+
+      i {
+        font-size: $icon-size;
+      }
+    }
+
+    & > .text {
+      width: calc(100% - #{$icon-size});
+      padding-left: 1rem;
+      text-align: justify;
+    }
+  }
+}

@@ -1,0 +1,87 @@
+@import "./colors.scss";
+
+button > span {
+  span:first-of-type {
+    margin-left: 0.5rem!important;
+  }
+}
+
+.btn-primary {
+  color: $btn-fg-primary;
+  background: $btn-bg-primary;
+  border-color: $btn-bg-primary;
+
+  &:active {
+    color: $btn-fg-primary-active;
+    background: $btn-bg-primary-active;
+    border-color: $btn-bg-primary-active;
+  }
+
+  &:hover, &:focus {
+    color: $btn-fg-primary-hover;
+    background: $btn-bg-primary-hover;
+    border-color: $btn-bg-primary-hover;
+  }
+}
+
+.btn-secondary {
+  color: $btn-fg-secondary;
+  background: $btn-bg-secondary;
+  border-color: $btn-bg-secondary;
+
+  &:active {
+    color: $btn-fg-secondary-active;
+    background: $btn-bg-secondary-active;
+    border-color: $btn-bg-secondary-active;
+  }
+
+  &:hover, &:focus {
+    color: $btn-fg-secondary-hover;
+    background: $btn-bg-secondary-hover;
+    border-color: $btn-bg-secondary-hover;
+  }
+}
+
+button:disabled {
+  cursor: not-allowed;
+  color: $btn-fg-disabled;
+  background: $btn-bg-disabled!important;
+  border-color: $btn-bg-disabled!important;
+}
+
+.btn-success {
+  color: $btn-fg-success;
+  background: $btn-bg-success;
+  border-color: $btn-bg-success;
+
+  &:active {
+    color: $btn-fg-success-active;
+    background: $btn-bg-success-active;
+    border-color: $btn-bg-success-active;
+  }
+
+  &:hover, &:focus {
+    color: $btn-fg-success-hover;
+    background: $btn-bg-success-hover;
+    border-color: $btn-bg-success-hover;
+  }
+}
+
+.btn-danger {
+  color: $btn-fg-danger;
+  background: $btn-bg-danger;
+  border-color: $btn-bg-danger;
+
+  &:active {
+    color: $btn-fg-danger-active;
+    background: $btn-bg-danger-active;
+    border-color: $btn-bg-danger-active;
+  }
+
+  &:hover, &:focus {
+    color: $btn-fg-danger-hover;
+    background: $btn-bg-danger-hover;
+    border-color: $btn-bg-danger-hover;
+  }
+}
+

@@ -1,0 +1,17 @@
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.flex-row.nowrap, .flex-row.nowrap {
+  flex-wrap: nowrap;
+}

@@ -1,0 +1,158 @@
+<div class="body flex-row">
+  <div class="lateralus row">
+    <div class="col-4">
+      <h3>
+        <strong>Países</strong>
+      </h3>
+
+      <app-search-table
+      [keys]="[ 'value.codigo', 'value.descripc' ]"
+      [placeholder]="'Buscar Países...'"
+      [input]="this.arrPais"
+      (output)="this.filterPais($event)">
+      </app-search-table>
+
+      <nz-table #tblPais
+      [nzData]="this.arrPaisFilter">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descripc.</th>
+            <th>
+              <label nz-checkbox
+              [ngModel]="this.chkPais"
+              (ngModelChange)="this.checkAllPais()"></label>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tblPais.data">
+            <td>{{ item.value.codigo }}</td>
+            <td>{{ item.value.descripc }}</td>
+            <td>
+              <label nz-checkbox
+              [(ngModel)]="item.checked"
+              (ngModelChange)="this.onCheck()"></label>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+    <div class="col-8">
+      <h3>
+        <strong>Productos</strong>
+      </h3>
+
+      <app-search-table
+      [keys]="[ 'value.codigo', 'value.descripc', 'value.familia.codigo', 'value.familia.descripc' ]"
+      [placeholder]="'Buscar Productos...'"
+      [input]="this.arrProd"
+      (output)="this.filterProd($event)">
+      </app-search-table>
+
+      <nz-table #tblProd
+      [nzData]="this.arrProdFilter">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Familia</th>
+            <th>Descripc.</th>
+            <th>
+              <label nz-checkbox
+              [ngModel]="this.chkProd"
+              (ngModelChange)="this.checkAllProd()"></label>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tblProd.data">
+            <td>{{ item.value.codigo }}</td>
+            <td>{{ item.value.familia.descripc }}</td>
+            <td>{{ item.value.descripc }}</td>
+            <td>
+              <label nz-checkbox
+              [(ngModel)]="item.checked"
+              (ngModelChange)="this.onCheck()"></label>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+
+  <div class="center flex-col">
+    <button nz-button class="btn-primary"
+    [disabled]="!this.isAddSelected()"
+    (click)="this.add()">
+      <i class="fas fa-angle-right"></i>
+    </button>
+
+    <button nz-button class="btn-danger"
+    [disabled]="!this.isRemSelected()"
+    (click)="this.remove()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="lateralus row">
+    <div class="col-12">
+      <h3>
+        <strong>Asignado</strong>
+      </h3>
+
+      <app-search-table
+      [keys]="[ 'value.pais.codigo', 'value.pais.descripc', 'value.producto.codigo', 'value.producto.descripc' ]"
+      [placeholder]="'Buscar Productos...'"
+      [input]="this.arrConf"
+      (output)="this.filterConf($event)">
+      </app-search-table>
+
+      <nz-table #tblConf
+      [nzData]="this.arrConfFilter">
+        <thead>
+          <tr>
+            <th>
+              <label nz-checkbox
+              [ngModel]="this.chkConf"
+              (ngModelChange)="this.checkAllConf()"></label>
+            </th>
+            <th>Cód. Pais</th>
+            <th>Desc. Pais</th>
+            <th>Cód. Prod.</th>
+            <th>Familia</th>
+            <th>Desc. Prod.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tblConf.data">
+            <td>
+              <label nz-checkbox
+              [(ngModel)]="item.checked"
+              (ngModelChange)="this.onCheck()"></label>
+            </td>
+            <td>{{ item.value.pais.codigo }}</td>
+            <td>{{ item.value.pais.descripc }}</td>
+            <td>{{ item.value.producto.codigo }}</td>
+            <td>{{ item.value.producto.familia.descripc }}</td>
+            <td>{{ item.value.producto.descripc }}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</div>
+
+<div *nzModalFooter>
+  <button nz-button class="btn-success"
+  (click)="this.onSave()">
+    <i class="fas fa-save"></i>
+    <span>Guardar</span>
+  </button>
+
+  <button nz-button class="btn-danger"
+  (click)="this.onDismiss()">
+    <i class="fas fa-times"></i>
+    <span>Cancelar</span>
+  </button>
+</div>

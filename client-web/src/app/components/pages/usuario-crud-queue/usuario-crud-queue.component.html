@@ -1,0 +1,50 @@
+<div class="main">
+  <app-search-table
+  [input]="this.data"
+  [keys]="this.filter"
+  (output)="this.filterData($event)">
+  </app-search-table>
+
+  <nz-table #tblData [nzData]="this.dataFiltered">
+    <thead>
+      <tr>
+        <th>Nick</th>
+        <th>E-Mail</th>
+        <th>Cargo</th>
+        <th>Creado En...</th>
+        <th>Creado Por...</th>
+        <th>Cargo Creador</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tblData.data">
+        <td>{{ item.user }}</td>
+        <td>{{ item.mail }}</td>
+        <td>{{ item.usuarioTipo.nombre }}</td>
+        <td>{{ item.createdAtStr }}</td>
+        <td>{{ item.creator.user }}</td>
+        <td>{{ item.creator.usuarioTipo.nombre }}</td>
+
+        <!-- Actions -->
+        <td class="actions flex-row nowrap">
+          <button type="button" nz-button nz-tooltip
+          [nzTooltipTitle]="'Eliminar'"
+          class="btn-danger"
+          (click)="this.delete(item)">
+            <i class="far fa-trash-alt"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>
+
+<div *nzModalFooter>
+  <button type="button" nz-button
+  class="btn-primary"
+  (click)="this.dismiss()">
+    <i class="far fa-thumbs-up"></i>
+    <span>Aceptar</span>
+  </button>
+</div>

@@ -1,0 +1,213 @@
+<nz-card [nzTitle]="'Previsualización de Productos'">
+  <div class="row">
+    <div class="field col-12">
+      <label>Producto:</label>
+      <nz-input-group class="input-product"
+      [nzAddOnAfter]="btnProduct">
+        <input type="text" nz-input
+        [placeholder]="'Seleccione un producto...'"
+        [ngModel]="(this.model.producto) ? '[' + this.model.producto.codigo + '] - ' + this.model.producto.descripc : null" />
+      </nz-input-group>
+
+      <ng-template #btnProduct>
+        <button nz-button
+        (click)="this.prodChange()"
+        nzType="primary">
+          <i class="fas fa-exchange-alt"></i>
+        </button>
+      </ng-template>
+    </div>
+
+    <div class="field col-12">
+      <label>Idiomas Disponibles:</label>
+      <nz-table #tblDetail
+      [nzSize]="'middle'"
+      [nzData]="(this.model.producto) ? this.model.producto.productoDet : []">
+        <thead>
+          <tr>
+            <th>Idioma</th>
+            <th>Traducción</th>
+            <th>Cod Inserción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prod of tblDetail.data"
+          (click)="this.onProdClick('\{ prod.det.' + prod.language.codigo + ' \}')">
+            <td>{{ prod.language.descripc }}</td>
+            <td>{{ prod.descripc }}</td>
+            <td class="cod-prod">
+              <code>{{ '\{ prod.det.' + prod.language.codigo + ' \}' }}</code>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </div>
+</nz-card>
+
+<nz-card [nzTitle]="'Datos de Prueba'">
+  <div class="row">
+    <div class="field col-4">
+      <label>Código Prod:</label>
+      <app-cmd-input
+      [isNumeric]="false"
+      [readonly]="true"
+      [model]="(this.model.producto) ? this.model.producto.codigo : null"
+      [copy]="'{ prod.cod }'">
+      </app-cmd-input>
+    </div>
+
+    <div class="field col-4">
+      <label>Familia Prod:</label>
+      <app-cmd-input
+      [isNumeric]="false"
+      [readonly]="true"
+      [model]="(this.model.producto) ? this.model.producto.familia.codigo : null"
+      [copy]="'{ prod.fam }'">
+      </app-cmd-input>
+    </div>
+
+    <div class="field col-4">
+      <label>Peso Neto:</label>
+      <app-cmd-input
+      [isNumeric]="true"
+      [precision]="2"
+      [min]="0"
+      [max]="99.99"
+      [(model)]="this.model.pesoNeto"
+      [copy]="'{ peso.neto }'">
+      </app-cmd-input>
+    </div>
+
+    <div class="field col-4">
+      <label>Peso Bruto:</label>
+      <app-cmd-input
+      [isNumeric]="true"
+      [precision]="2"
+      [min]="0"
+      [max]="99.99"
+      [(model)]="this.model.pesoBruto"
+      [copy]="'{ peso.bruto }'">
+      </app-cmd-input>
+    </div>
+
+    <div class="field col-4">
+      <label>Cód de Barras:</label>
+      <app-cmd-input
+      [isNumeric]="false"
+      [copy]="'{ barcode }'"
+      [maxLength]="20"
+      [(model)]="this.model.barcode">
+      </app-cmd-input>
+    </div>
+
+    <div class="field col-4">
+      <label>Cód Animal:</label>
+      <app-cmd-input
+      [isNumeric]="false"
+      [copy]="'{ codanimal }'"
+      [maxLength]="20"
+      [(model)]="this.model.codAnimal">
+      </app-cmd-input>
+    </div>
+
+    <div class="field col-4">
+      <label>Contrato:</label>
+      <app-cmd-input
+      [isNumeric]="true"
+      [min]="0"
+      [max]="999999"
+      [copy]="'{ contrato }'"
+      [(model)]="this.model.contrato">
+      </app-cmd-input>
+    </div>
+
+    <div class="field col-4">
+      <label>Lote Certif:</label>
+      <app-cmd-input
+      [isNumeric]="true"
+      [precision]="0"
+      [min]="0"
+      [max]="999999"
+      [copy]="'{ loteCertif }'"
+      [(model)]="this.model.loteCertif">
+      </app-cmd-input>
+    </div>
+
+    <div class="field col-4">
+      <label>Fecha Faena:</label>
+      <app-cmd-datepicker
+      [copyYear]="'{ fecha.faena.year }'"
+      [copyMonth]="'{ fecha.faena.month }'"
+      [copyDay]="'{ fecha.faena.day }'"
+      [(model)]="this.model.fechaFaena">
+      </app-cmd-datepicker>
+    </div>
+
+    <div class="field col-4">
+      <label>Fecha Producc:</label>
+      <app-cmd-datepicker
+      [copyYear]="'{ fecha.producc.year }'"
+      [copyMonth]="'{ fecha.producc.month }'"
+      [copyDay]="'{ fecha.producc.day }'"
+      [(model)]="this.model.fechaProducc">
+      </app-cmd-datepicker>
+    </div>
+
+    <div class="field col-4">
+      <label>Fecha Vencim:</label>
+      <app-cmd-datepicker
+      [copyYear]="'{ fecha.vencim.year }'"
+      [copyMonth]="'{ fecha.vencim.month }'"
+      [copyDay]="'{ fecha.vencim.day }'"
+      [(model)]="this.model.fechaVencim">
+      </app-cmd-datepicker>
+    </div>
+  </div>
+</nz-card>
+
+<nz-modal class="mdlProd"
+[nzFooter]="mdlProdFooter"
+[nzWidth]="'calc(100vw - 5rem)'"
+[nzVisible]="this.mdlProdVisible"
+[nzTitle]="'Seleccione Producto:'">
+  <app-search-table
+  [input]="this.productos"
+  (output)="this.onFilterProd($event)"
+  [keys]="[ 'familia.codigo', 'familia.descripc', 'codigo', 'descripc' ]">
+  </app-search-table>
+
+  <nz-table [nzData]="this.productosFilter" #tblProd>
+    <thead>
+      <tr>
+        <th>Cód. Familia</th>
+        <th>Des. Familia</th>
+        <th>Cód. Producto</th>
+        <th>Des. Producto</th>
+        <th>Seleccionar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tblProd.data">
+        <td>{{ item.familia.codigo }}</td>
+        <td>{{ item.familia.descripc }}</td>
+        <td>{{ item.codigo }}</td>
+        <td>{{ item.descripc }}</td>
+        <td>
+          <button type="button" nz-button class="btn-primary"
+          (click)="this.onProductChange(item)">
+            <i class="fas fa-angle-right"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+
+  <ng-template #mdlProdFooter>
+    <button type="button" nz-button class="btn-secondary"
+    (click)="this.mdlProdVisible = false">
+      <i class="fas fa-times"></i>
+      <span>Cancelar</span>
+    </button>
+  </ng-template>
+</nz-modal>

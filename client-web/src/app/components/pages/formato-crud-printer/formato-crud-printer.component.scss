@@ -1,0 +1,27 @@
+.data {
+  width: 50%;
+
+  &:nth-child(1) { padding-right: 1rem; }
+  &:nth-child(2) { padding-left: 1rem; }
+}
+
+nz-list {
+  max-height: calc(100vh - 24rem);
+  overflow-y: auto;
+
+  nz-list-item {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    & > span {
+      overflow: auto;
+      flex: 1;
+    }
+
+    & > div {
+      width: 3rem;
+    }
+  }
+}

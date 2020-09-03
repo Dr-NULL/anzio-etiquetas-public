@@ -1,0 +1,25 @@
+<label *ngIf="this.title">{{ this.title }}</label>
+
+<div class="knob" #refKnob
+[style.width]="this.knobSize"
+[style.height]="this.knobSize"
+[style.minWidth]="this.knobSize"
+[style.minHeight]="this.knobSize">
+  <div class="bg"></div>
+  <div class="dial"></div>
+  <div class="tick"
+  [style.transform]="'rotate(' + this.angle + 'deg)'">
+    <div class="content"
+    [style.transform]="'rotate(' + (360 - this.angle) + 'deg)'">
+    </div>
+  </div>
+
+  <div class="mask"
+  (mousedown)="this.onMouseDown($event)"></div>
+</div>
+
+<input nz-input #refInput
+[readOnly]="this.readOnly"
+[ngModel]="this.value"
+(input)="this.onChange($event.currentTarget)"
+(blur)="this.onBlur($event.currentTarget)" />

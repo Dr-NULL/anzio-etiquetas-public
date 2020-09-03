@@ -1,0 +1,135 @@
+<div class="label flex-row">
+  <div class="switcher flex-row">
+    <h3>Modo Visualización:</h3>
+    <nz-radio-group
+    [(ngModel)]="objLabel.showOriginal">
+      <label nz-radio [nzValue]="true">Original</label>
+      <label nz-radio [nzValue]="false">Copias</label>
+    </nz-radio-group>
+  </div>
+
+  <div class="model flex-row">
+    <app-label #objLabel
+    [(selection)]="this.selected"
+    [model]="this.label"
+    (clickText)="this.onClickText($event)"
+    (clickRect)="this.onClickRect($event)"
+    (clickPict)="this.onClickPict($event)">
+    </app-label>
+  </div>
+</div>
+
+<app-tab-ctrl [positionHor]="'left'" [positionVer]="'top'" [(index)]="this.tab">
+  <app-tab-elem>
+    <i class="fas fa-quote-right"></i>
+    <span>Texto</span>
+  </app-tab-elem>
+  <app-tab-view>
+    <div class="list">
+      <app-formato-text
+      *ngFor="let item of this.label.formatoText; index as i; trackBy: this.trackByFunc"
+      [index]="i"
+      [width]="this.label.width"
+      [height]="this.label.height"
+      [selected]="this.selected"
+      (selectedChange)="this.selected = $event"
+      [(model)]="this.label.formatoText[i]">
+      </app-formato-text>
+    </div>
+    <nz-divider nzDashed></nz-divider>
+    <div class="actions flex-row">
+      <button nz-button class="btn-primary flex-4" (click)="this.onNewText()">
+        <i class="fas fa-plus"></i>
+        <i class="fas fa-heading"></i>
+      </button>
+      <button nz-button class="btn-primary flex-4"
+      [disabled]="(this.selected == null)"
+      (click)="this.onRemoveText()">
+        <i class="fas fa-minus"></i>
+        <i class="fas fa-heading"></i>
+      </button>
+      <button nz-button nzType="primary" class=" flex-2" (click)="this.onSave()">
+        <i class="far fa-save"></i>
+        <span>Guardar Cambios</span>
+      </button>
+    </div>
+  </app-tab-view>
+
+  <app-tab-elem>
+    <i class="fas fa-expand"></i>
+    <span>Bloques</span>
+  </app-tab-elem>
+  <app-tab-view>
+    <div class="list">
+      <app-formato-rect
+      *ngFor="let item of this.label.formatoRect; index as i; trackBy: this.trackByFunc"
+      [index]="i + this.label.formatoText.length"
+      [width]="this.label.width"
+      [height]="this.label.height"
+      [selected]="this.selected"
+      (selectedChange)="this.selected = $event"
+      [(model)]="this.label.formatoRect[i]">
+      </app-formato-rect>
+    </div>
+
+    <nz-divider nzDashed></nz-divider>
+    <div class="actions flex-row">
+      <button nz-button class="btn-primary flex-4" (click)="this.onNewRect()">
+        <i class="fas fa-plus"></i>
+        <i class="fas fa-expand"></i>
+      </button>
+      <button nz-button class="btn-primary flex-4"
+      [disabled]="(this.selected == null)"
+      (click)="this.onRemoveRect()">
+        <i class="fas fa-minus"></i>
+        <i class="fas fa-expand"></i>
+      </button>
+      <button nz-button nzType="primary" class=" flex-2" (click)="this.onSave()">
+        <i class="far fa-save"></i>
+        <span>Guardar Cambios</span>
+      </button>
+    </div>
+  </app-tab-view>
+
+  <app-tab-elem>
+    <i class="far fa-images"></i>
+    <span>Imágenes</span>
+  </app-tab-elem>
+  <app-tab-view>
+    <div class="list">
+      <app-formato-pict
+      *ngFor="let pict of this.label.formatoPict; index as i"
+      [width]="this.label.width"
+      [height]="this.label.height"
+      [index]="i + this.label.formatoRect.length + this.label.formatoText.length"
+      [(model)]="this.label.formatoPict[i]"
+      [(selected)]="this.selected">
+      </app-formato-pict>
+    </div>
+    <div class="actions flex-row">
+      <button nz-button class="btn-primary flex-4" (click)="this.onNewPict()">
+        <i class="fas fa-plus"></i>
+        <i nz-icon nzType="file-image" nzTheme="outline"></i>
+      </button>
+      <button nz-button class="btn-primary flex-4"
+      [disabled]="(this.selected == null)"
+      (click)="this.onRemovePict()">
+        <i class="fas fa-minus"></i>
+        <i nz-icon nzType="file-image" nzTheme="outline"></i>
+      </button>
+      <button nz-button nzType="primary" class=" flex-2" (click)="this.onSave()">
+        <i class="far fa-save"></i>
+        <span>Guardar Cambios</span>
+      </button>
+    </div>
+  </app-tab-view>
+
+  <app-tab-elem>
+    <i class="fas fa-align-center"></i>
+    <span>Previsualizar</span>
+  </app-tab-elem>
+  <app-tab-view>
+    <app-formato-test>
+    </app-formato-test>
+  </app-tab-view>
+</app-tab-ctrl>

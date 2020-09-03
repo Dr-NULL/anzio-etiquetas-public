@@ -1,0 +1,45 @@
+@import "../../../styles/colors.scss";
+$padding: 1rem;
+
+:host {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+
+  background: $bg-02;
+  z-index: 0;
+  cursor: pointer!important;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+:host {
+  transition-duration: 250ms;
+  background: $bg-02;
+  z-index: 0;
+}
+
+:host.active {
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
+  transition-duration: 250ms;
+  background: $bg-03;
+  z-index: 100;
+}
+
+:host.horizontal {
+  padding-left: $padding;
+  padding-right: $padding;
+  width: auto;
+  height: 100%;
+}
+
+:host.vertical {
+  padding-top: $padding;
+  padding-bottom: $padding;
+  width: 100%;
+  height: auto;
+}

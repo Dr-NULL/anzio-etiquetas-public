@@ -1,0 +1,152 @@
+@import "../../../styles/colors.scss";
+:host {
+  display: flex;
+  flex-flow: row wrap!important;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+// @media screen and (min-width: 800)  {
+  .label {
+    width: 55%;
+    height: 100%;
+  }
+
+  app-tab-ctrl {
+    width: 45%;
+    height: 100%;
+  }
+
+  app-tab-elem i {
+    transform: rotate(90deg);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+// }
+
+@media screen and (max-width: 1024px) {
+  .label {
+    width: 100%;
+    height: 40%;
+  }
+
+  app-tab-ctrl {
+    width: 100%;
+    height: 60%;
+  }
+
+  app-tab-elem i {
+    transform: rotate(0);
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+  }
+}
+
+.label {
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+
+  .switcher {
+    justify-content: flex-start;
+    align-items: center;
+    color: $fg-01!important;
+
+    width: 100%;
+    height: 4rem;
+    padding: 0 1rem;
+
+    * {
+      color: $fg-01!important;
+    }
+
+    h3 {
+      width: 100%;
+    }
+  }
+
+  .model {
+    justify-content: center;
+    align-items: center;
+
+    padding: 1rem;
+    width: 100%;
+    height: calc(100% - 4rem);
+
+    app-label {
+      background: $fg-01;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+
+app-tab-ctrl {
+  display: flex;
+  box-sizing: border-box;
+
+  app-tab-view .list > * {
+    box-sizing: border-box;
+    margin: 0.5rem;
+  }
+
+  app-tab-view .list > * {
+    transition-duration: 250ms;
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  app-tab-view .list > *.blur {
+    transition-duration: 250ms;
+    filter: blur(2px);
+    opacity: 0.5;
+  }
+
+  .ant-card-head-title, .ant-card-body {
+    padding: 0.25rem!important;
+  }
+
+  .row > div nz-input-group {
+    padding-top: 0;
+    padding-bottom: 0;
+
+    &:nth-child(1) {
+      padding-left: 0;
+    }
+    &:nth-last-child(1) {
+      padding-right: 0;
+    }
+  }
+
+
+  .list {
+    box-sizing: border-box;
+    height: calc(100% - 4rem);
+    overflow-y: auto;
+  }
+
+  nz-divider {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-color: #505050;
+  }
+
+  .actions {
+    width: 100%;
+    height: calc(4rem - 1px);
+    align-items: stretch;
+
+    i:not(:nth-last-child(1)) {
+      margin-right: 0.5rem;
+    }
+
+    @for $i from 1 through 10 {
+      & > .flex-#{$i} {
+        width: calc((100% / #{$i}) - 1rem);
+        height: calc(100% - 1rem);
+        margin: 0.5rem;
+      }
+    }
+  }
+}

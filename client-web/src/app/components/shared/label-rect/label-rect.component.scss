@@ -1,0 +1,50 @@
+@import "../../../styles/colors.scss";
+
+:host {
+  position: absolute;
+  border: 1px solid;
+  opacity: 1;
+  filter: blur(0);
+}
+
+:host {
+  transition-duration: 250ms;
+  opacity: 1;
+  filter: blur(0);
+}
+
+:host.selected {
+  animation-name: tilt;
+  animation-iteration-count: infinite;
+  animation-duration: 500ms;
+}
+
+:host:hover {
+  cursor: pointer;
+  transition-duration: 250ms;
+  opacity: 1;
+}
+
+:host.unselected {
+  transition-duration: 250ms;
+  opacity: 0.4;
+  filter: blur(2px);
+}
+
+:host.unselected:hover {
+  transition-duration: 250ms;
+  opacity: 0.4;
+  filter: blur(0);
+}
+
+@keyframes tilt {
+    0% { opacity: 1; }
+
+   25% { opacity: 1; }
+
+   50% { opacity: 1; }
+
+   64% { opacity: 0.5; }
+
+   80% { opacity: 1; }
+}

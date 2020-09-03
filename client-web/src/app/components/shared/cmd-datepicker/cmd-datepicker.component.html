@@ -1,0 +1,35 @@
+<nz-date-picker
+[nzFormat]="'dd/MM/yyyy'"
+[ngModel]="this.model"
+(ngModelChange)="this.onChange($event)">
+</nz-date-picker>
+
+<div nz-popover class="icon"
+nzPopoverTitle="Copiar..."
+[nzPopoverContent]="tooltip"
+[nzPopoverTrigger]="'hover'">
+  <i class="far fa-copy"></i>
+</div>
+
+<ng-template #tooltip>
+  <div class="tooltip">
+    <div class="btn btn-primary"
+    (click)="this.onCopy(this.copyYear)">
+      <span>Año</span>
+    </div>
+    <div class="slash">
+      <span>/</span>
+    </div>
+    <div class="btn btn-primary"
+    (click)="this.onCopy(this.copyMonth)">
+      <span>Mes</span>
+    </div>
+    <div class="slash">
+      <span>/</span>
+    </div>
+    <div class="btn btn-primary"
+    (click)="this.onCopy(this.copyDay)">
+      <span>Día</span>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,86 @@
+@import "../../../styles/colors.scss";
+
+:host {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: row wrap;
+
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  .content-elem {
+    z-index: 50;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .content-view {
+    z-index: 100;
+    display: flex;
+    display: -webkit-flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    background: $bg-03;
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* Tamaño */
+:host {
+  &.tab-top, &.tab-bottom {
+    .content-elem {
+      flex-flow: row wrap;
+      writing-mode: initial;
+      width: 100%;
+      height: 4rem;
+    }
+
+    .content-view {
+      width: 100%;
+      height: calc(100% - 4rem);
+    }
+  }
+
+  &.tab-left, &.tab-right {
+    .content-elem {
+      flex-flow: row wrap;
+      writing-mode: vertical-rl;
+      width: 4rem;
+      height: 100%;
+    }
+
+    .content-view {
+      width: calc(100% - 4rem);
+      height: 100%;
+    }
+  }
+}
+
+/* Posición */
+:host {
+  &.tab-top, &.tab-left {
+    .content-elem {
+      order: 0;
+    }
+
+    .content-view {
+      order: 1;
+    }
+  }
+
+  &.tab-bottom, &.tab-right {
+    .content-elem {
+      order: 1;
+    }
+
+    .content-view {
+      order: 0;
+    }
+  }
+}

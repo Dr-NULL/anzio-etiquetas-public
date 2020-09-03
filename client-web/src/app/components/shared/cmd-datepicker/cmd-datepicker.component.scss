@@ -1,0 +1,42 @@
+:host {
+  display: flex;
+  flex-flow: row-reverse nowrap;
+}
+
+.icon {
+  cursor: pointer;
+  background: #fafafa;
+  border: 1px solid #d9d9d9;
+
+  width: 2.2rem;
+  box-sizing: border-box;
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+nz-date-picker {
+  flex: 1;
+  
+  & ::ng-deep input {
+    border-radius: 0 4px 4px 0;
+  }
+}
+
+.tooltip {
+  .btn {
+    display: inline-flex;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+  }
+
+  .slash {
+    display: inline-flex;
+    padding: 0.25rem 0.5rem;
+  }
+}
